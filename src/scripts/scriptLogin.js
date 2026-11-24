@@ -6,11 +6,11 @@ const form = document.querySelector('form');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('password').value;
 
     try {
-        await controller.login(username, password);
+        await controller.login(email, senha);
         window.location.assign('./src/views/welcomepage.html');
     } catch (error) {
         alert(error.message || 'Não foi possível efetuar o login.');

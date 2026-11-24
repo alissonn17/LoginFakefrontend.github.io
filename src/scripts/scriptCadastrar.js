@@ -8,8 +8,8 @@ form.addEventListener('submit', async (event) => {
     event.preventDefault();
     messageElement.textContent = '';
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const name = document.getElementById('name').value;
+    const senha = document.getElementById('password').value;
     const password2 = document.getElementById('password2').value;
     const email = document.getElementById('email').value;
     const birthdate = document.getElementById('birthdate').value;
@@ -26,8 +26,8 @@ form.addEventListener('submit', async (event) => {
 
     try {
         const resposta = await controller.cadastrar(
-            username,
-            password,
+            name,
+            senha,
             password2,
             email,
             birthdate,

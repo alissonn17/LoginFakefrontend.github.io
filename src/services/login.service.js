@@ -1,9 +1,9 @@
 export default class LoginService {
-    async login(username, password) {
+    async login(email, senha) {
         const response = await fetch(`https://loginfake.onrender.com/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, senha })
         });
 
         const data = await response.json();
