@@ -11,7 +11,7 @@ form.addEventListener('submit', async (event) => {
 
     try {
         await controller.login(username, password);
-        window.location.assign('./views/welcomepage.html');
+        window.location.assign('./src/views/welcomepage.html');
     } catch (error) {
         alert(error.message || 'Não foi possível efetuar o login.');
     }
