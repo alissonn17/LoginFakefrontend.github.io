@@ -1,14 +1,41 @@
-import CadastrarController from '../controller/cadastrar.controller.js';
+import CadastrarController from '../controllers/cadastrar.controller.js';
 
-const cadastrarButton = document.getElementById('cadastrar-button');
+const controller = new CadastrarController();
+const form = document.getElementById('cadastrar-form');
+const messageElement = document.getElementById('cadastro-message');
 
-cadastrarButton.addEventListener('click', () => {
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    messageElement.textContent = '';
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    const password2 = document.getElementById('password2').value;
+    const email = document.getElementById('email').value;
+    const birthdate = document.getElementById('birthdate').value;
+    const cellphone = document.getElementById('cellphone').value;
 
-    // Perform registration logic here
-    console.log(`Registering with username: ${username} and password: ${password}`);
+    if (!email.includes('@')) {
+        alert('O e-mail deve conter @.');
+        return;
+    }
 
-    // You can add your registration logic here, such as sending a request to a server
-    CadastrarController.cadastrar(username, password);
+    if (!form.reportValidity()) {
+        return;
+    }
+
+    try {
+        const resposta = await controller.cadastrar(
+            username,
+            password,
+            password2,
+            email,
+            birthdate,
+            cellphone
+        );
+        messageElement.textContent = resposta.message || 'Cadastro realizado com sucesso.';
+        window.location.assign('./welcomepage.html');
+    } catch (error) {
+        alert(error.message || 'Não foi possível efetuar o cadastro.');
+    }
 });

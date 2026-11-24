@@ -1,15 +1,19 @@
-import LoginController from '../controller/login.controller.js';
+import LoginController from '../controllers/login.controller.js';
 
-const loginButton = document.getElementById('login-button');
+const controller = new LoginController();
+const form = document.querySelector('form');
 
-loginButton.addEventListener('click', () => {
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Perform login logic here
-    console.log(`Logging in with username: ${username} and password: ${password}`);
-
-    // You can add your authentication logic here, such as sending a request to a server
-    LoginController.login(username, password);
+    try {
+        await controller.login(username, password);
+        window.location.assign('./views/welcomepage.html');
+    } catch (error) {
+        alert(error.message || 'Não foi possível efetuar o login.');
+    }
 });
 
